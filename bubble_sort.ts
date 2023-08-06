@@ -1,9 +1,4 @@
-function swap(arr: any[], i: number, j: number) {
-  const temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
-
+import { swap } from "./util";
 /**
  * Bubble sort algorithm
  * The main idea is to compare each element with the next one
