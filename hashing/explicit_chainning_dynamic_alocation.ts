@@ -1,8 +1,8 @@
-class HashElement {
+class DynamicAllocationHashElement {
   key: number;
   value: unknown;
-  next: HashElement | null;
-  previous: HashElement | null;
+  next: DynamicAllocationHashElement | null;
+  previous: DynamicAllocationHashElement | null;
 
   constructor(key: number, value: unknown) {
     this.key = key;
@@ -12,8 +12,8 @@ class HashElement {
   }
 }
 
-class HashTable {
-  public elements: (HashElement | undefined)[];
+class DynamicAllocationHashTable {
+  public elements: (DynamicAllocationHashElement | undefined)[];
   public size: number;
 
   constructor(size: number) {
@@ -25,7 +25,7 @@ class HashTable {
     return key % this.size;
   }
 
-  public insert(element: HashElement) {
+  public insert(element: DynamicAllocationHashElement) {
     const elementIndex = this.hash(element.key);
     if (this.elements[elementIndex] === undefined) {
       this.elements[elementIndex] = element;
@@ -38,13 +38,14 @@ class HashTable {
     return true;
   }
 
-  public search(key: number): HashElement | null {
+  public search(key: number): DynamicAllocationHashElement | null {
     const elementIndex = this.hash(key);
     if (this.elements[elementIndex] === undefined) return null;
     if (this.elements[elementIndex]!.key === key)
-      return this.elements[elementIndex] as HashElement;
+      return this.elements[elementIndex] as DynamicAllocationHashElement;
 
-    let traverser: HashElement | null = this.elements[elementIndex]!;
+    let traverser: DynamicAllocationHashElement | null =
+      this.elements[elementIndex]!;
     while (traverser) {
       if (traverser.key === key) return traverser;
       traverser = traverser.next;
@@ -68,29 +69,29 @@ class HashTable {
   }
 }
 
-const hashTable = new HashTable(11);
+const hashTable = new DynamicAllocationHashTable(11);
 
 hashTable.print();
 
-const element1 = new HashElement(23, 1);
+const element1 = new DynamicAllocationHashElement(23, 1);
 
 hashTable.insert(element1);
 
 hashTable.print();
 
-const element2 = new HashElement(33, 1);
+const element2 = new DynamicAllocationHashElement(33, 1);
 
 hashTable.insert(element2);
 
 hashTable.print();
 
-const element3 = new HashElement(43, 1);
+const element3 = new DynamicAllocationHashElement(43, 1);
 
 hashTable.insert(element3);
 
 hashTable.print();
 
-const element4 = new HashElement(43, 1);
+const element4 = new DynamicAllocationHashElement(43, 1);
 
 hashTable.insert(element4);
 
